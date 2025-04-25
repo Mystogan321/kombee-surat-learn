@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -18,6 +17,7 @@ import Courses from "./pages/Courses";
 import AdminDashboard from "./pages/AdminDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
+import UsersManagement from './pages/admin/UsersManagement';
 
 // Initialize Redux store
 const queryClient = new QueryClient();
@@ -72,6 +72,17 @@ const App = () => (
               }
             />
             
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <MainLayout>
+                    <UsersManagement />
+                  </MainLayout>
+                </ProtectedRoute>
+              }
+            />
+
             {/* Redirect root to dashboard */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             
