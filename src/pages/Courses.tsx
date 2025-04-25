@@ -33,7 +33,7 @@ const Courses = () => {
   });
   
   // Get unique levels for filtering
-  const levels = Array.from(new Set(courses.map(course => course.level)));
+  const levels = Array.from(new Set(courses.map(course => course.level))) as string[];
 
   return (
     <MainLayout>
@@ -73,10 +73,10 @@ const Courses = () => {
             key={level}
             variant={selectedLevel === level ? 'default' : 'outline'}
             size="sm"
-            onClick={() => setSelectedLevel(level === selectedLevel ? null : level)}
+            onClick={() => setSelectedLevel(level)}
             className={selectedLevel === level ? 'bg-kombee-purple hover:bg-kombee-purple-dark' : 'border-kombee-purple/30 text-white hover:bg-kombee-purple/20'}
           >
-            {level?.charAt(0).toUpperCase() + level?.slice(1)}
+            {level.charAt(0).toUpperCase() + level.slice(1)}
           </Button>
         ))}
       </div>
@@ -104,7 +104,7 @@ const Courses = () => {
                     course.level === 'intermediate' ? 'bg-yellow-900/50 text-yellow-300 hover:bg-yellow-900' :
                     'bg-red-900/50 text-red-300 hover:bg-red-900'
                   }>
-                    {course.level?.charAt(0).toUpperCase() + course.level?.slice(1)}
+                    {course.level && (course.level.charAt(0).toUpperCase() + course.level.slice(1))}
                   </Badge>
                 </div>
               </CardHeader>
