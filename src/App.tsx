@@ -9,11 +9,13 @@ import { Provider } from "react-redux";
 import { store } from "./lib/store";
 import { checkAuthStatus } from "./lib/store/slices/authSlice";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+import { MainLayout } from "./components/layout/MainLayout";
 
 // Pages
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
+import AdminDashboard from "./pages/AdminDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 
@@ -40,7 +42,9 @@ const App = () => (
               path="/dashboard" 
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <MainLayout>
+                    <Dashboard />
+                  </MainLayout>
                 </ProtectedRoute>
               } 
             />
@@ -49,9 +53,23 @@ const App = () => (
               path="/courses" 
               element={
                 <ProtectedRoute>
-                  <Courses />
+                  <MainLayout>
+                    <Courses />
+                  </MainLayout>
                 </ProtectedRoute>
               } 
+            />
+
+            {/* Admin routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <MainLayout>
+                    <AdminDashboard />
+                  </MainLayout>
+                </ProtectedRoute>
+              }
             />
             
             {/* Redirect root to dashboard */}

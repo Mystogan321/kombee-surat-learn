@@ -45,6 +45,7 @@ export const SidebarNavigation = () => {
     { name: 'Certificates', href: '/certificates', icon: Award },
     { name: 'Reports', href: '/reports', icon: BarChart, requiredPermission: 'view_reports' },
     { name: 'Users', href: '/users', icon: Users, requiredPermission: 'view_users' },
+    { name: 'Admin Dashboard', href: '/admin', icon: Users, adminOnly: true },
   ];
 
   const filteredNavigation = navigation.filter(item => {
